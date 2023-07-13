@@ -18,13 +18,17 @@ import os
 import re
 import logging
 
+#테스트 모드를 할때(단독실행)는 m4a폴더를 만들어주어야 한다.
+TEST_MODE = True
+M4A_PATH = "./m4a"
+
 #wav파일과 stt를 위한 잘린wav파일들을 저장하는 장소 만들어주기
 SPLITWAV_PATH = "./cut_wav"
 WAV_PATH = "./convert_wav"
 m4a_filename = ""
 
 #진행상황과 결과값을 주기위한 url설정
-portnumber = "http://127.0.0.1:5502"
+portnumber = "http://127.0.0.1:9966"
 
 #log찍으려고 하는것(난이도 설정가능함)
 logging.basicConfig(level=logging.INFO)
@@ -197,12 +201,21 @@ api = Api(app)
 @api.route("/api/VoiClaReq/<string:user_id>/<string:declaration>", methods=["POST"])
 class HelloWorld(Resource):
     def post(self, user_id, declaration):
-        global SPLITWAV_PATH, WAV_PATH, portnumber
+        global SPLITWAV_PATH, WAV_PATH, portnumber, m4a_filename, M4A_PATH, TEST_MODE
         if request.method == 'POST':
             #spring서버에서 저장한 파일경로를 읽어서 m4a파일 찾기
-            file = request.form["file"]
+            #from은 spring과 연결을 할때쓰기, files는 단독실행시
+            if TEST_MODE:
+                file = request.files["file"]
+                m4a_filename = os.path.join(M4A_PATH, file.filename)
+                file.save(m4a_filename)
+            else:
+                file = request.form["file"]
             notify_file_received(user_id, declaration)
-            wav_filename = m4a_wav_convert(file, WAV_PATH)
+            if TEST_MODE:
+                wav_filename = m4a_wav_convert(m4a_filename, WAV_PATH)
+            else:
+                wav_filename = m4a_wav_convert(file, WAV_PATH)
             FileName = wav_filename.replace(WAV_PATH, "")
             notify_wav_conversion(user_id, declaration)
             cut_wav(wav_filename)
@@ -242,6 +255,13 @@ class HelloWorld(Resource):
             # cursor.close()
             # conn.close()
 
+            if TEST_MODE:
+                for filename1 in os.listdir(M4A_PATH):
+                    file_path1 = os.path.join(M4A_PATH, filename1)
+                    if os.path.isfile(file_path1):
+                        os.remove(file_path1)
+                        print(f"{filename1} 파일이 삭제되었습니다.")
+
             #120초씩 잘랐던 파일들을 삭제하는 내용(용량줄이기)
             for filename2 in os.listdir(SPLITWAV_PATH):
                 file_path2 = os.path.join(SPLITWAV_PATH, filename2)
@@ -253,4 +273,14 @@ class HelloWorld(Resource):
 
 
 if __name__ == "__main__":
+    if not os.path.exists(WAV_PATH):
+        os.mkdir(WAV_PATH)
+        pass
+    if not os.path.exists(SPLITWAV_PATH):
+        os.mkdir(SPLITWAV_PATH)
+        pass
+    if TEST_MODE:
+        if not os.path.exists(M4A_PATH):
+            os.mkdir(M4A_PATH)
+            pass
     app.run(debug=False, host="0.0.0.0", port=9966)
