@@ -7,6 +7,9 @@
 ==>그리고 진행상황을 25%,50%이런식으로 4단계에 나눠서 중간중간에 보내줄 예정
 ==>model만든 부분(층쌓기같은거),Tokenizer부분은 재민이와 이야기 나눠보면서 정리할것
 
+※하기전에 
+pip install flask flask_restx keras pydub soundfile pickle numpy urllib requests mariadb librosa SpeechRecognition tensorflow
+
 ※flask가 돌아가는 순서
 ----------------------------------------------------------------------------------------------------------------------
 ==>finalyeah.py파일
