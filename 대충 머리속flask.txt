@@ -1,0 +1,86 @@
+보이스피싱검출과 mfcc(음성변조)검출을 기반해서 어플만들기
+
+내가 작성한 부분은 model두개를 받아서 flask라는 API를 완성하기
+※진행방향(동우쪽에서 파일과 유저아이디와 신고할 전화번호를 같이 보내줄 예정)
+동우(어플:client)-->범휘(RestAPI:Spring boot)-->???(flask)
+==>flask에서 진행이 된후 결과값을 반대방향으로 건네줄 예정
+==>그리고 진행상황을 25%,50%이런식으로 4단계에 나눠서 중간중간에 보내줄 예정
+==>model만든 부분(층쌓기같은거),Tokenizer부분은 재민이와 이야기 나눠보면서 정리할것
+
+※하기전에 
+pip install flask flask_restx keras pydub soundfile pickle numpy urllib requests mariadb librosa SpeechRecognition tensorflow
+
+※flask가 돌아가는 순서
+----------------------------------------------------------------------------------------------------------------------
+==>finalyeah.py파일
+Spring boot쪽에서 파일을 저장하고 그 주소(경로)를 flask에 던져주면 flask가 읽으면서 맞는 파일을
+찾아서 .m4a파일을 .wav으로 만들고(m4a_wav_convert) 
+convert_wav이 폴더에 저장
+STT하기에 크기가 제한이 있어서 120초씩 잘라서(cut_wav,trim_audio_data) 
+cut_wav라는 폴더에 저장 
+그 폴더(cut_wav)에 있는 파일들을 리스트로 만들어서(get_datalist) 
+하나하나 STT로 변환(transcribe_audio==음성파일을 텍스트화)
+그리고 나서 그 텍스트들을 리스트에 append를 시켰기에 하나로 합쳐서(concatenate_texts==[1,2,3]-->[123]이런식) 
+그 뒤에 tokenizer_pre.pickle와 model_pre.h5(저장된)파일을 불러와서 model을 돌리고 
+나온 결과값(predict1)을 일정범위로 나누어서 정수로 반환해주면 됨
+그 뒤에 또 다른 model을 돌려야 하기에 .wav파일을 따로 저장을 해둠 
+convert_wav폴더안에 해당 wav파일을 읽어와서 mfcc화를 시키고(wav_mfcc) 
+mfcc.h5이라는 model을 불러와서 2번째 결과값을 얻으면 됨(predict2)
+predict1과 predict2의 값을 사전형태로 담아서 Spring boot(범휘API)로 보내줄 예정
+이후에 return을 해주면 저장된 값들이 사라짐으로 그전에 DB를 열고 insert를 한다음
+120초로 잘린 wav파일들은 삭제할 예정(그래야 쓸데없는 용량을 줄일 수 있음)
+insert할때는 받은 user_id, declaration와 
+audio_file(파일이름),content(STT한 내용),disdata(predict1의 결과값),created_date(생성일),mfcc(predict2의 결과값)
+하면 됨 
+
+※대충 발표할때 result1 >= 0.35이런 값을 정한 이유는 현재 만들어진 model을 돌려봤을때
+model이 판별해주는 값이 이정도의 수치가 그나마 신뢰도가 있다는 식으로 말하면 될것임
+
+※result2 = model2.evaluate(x=X_data, y=y_data)[1]
+이 부분을 이렇게 쓴 이유는 evaluate를 하게 되면 loss와 accuracy가 같이 나오기에 
+accuracy를 토대로 결과값을 내기 위해 이렇게 씀
+
+※declaration이 부분을 정규식을 쓴 이유는 010-1234-4567 이런식으로 오거나 010/1234/4567등 여러가지로 올수있기에 
+숫자말고는 다 없애도록 설정한것
+-->이 부분은 정수로 보내지말고 string으로 감싼뒤넣어도 무방할듯 
+
+==>여기까지
+-------------------------------------------------------------------------------------------------------------------------
+==>ReRoll.py파일
+
+※predict2의 결과값은 재학습X/model_update안함
+
+※predict1의 결과값이 의심이 들어 다시 재학습을 원한다면 content(STT한 내용)만 빼와서 던져주면 됨 
+이후 나온 결과값은 update구문으로 재학습 칼럼(reroll)에 넣으면 됨
+
+==>update쿼리를 하려면 user_id와 declaration을 같이 주고 and를 써서 확인을 해줘야 update할 수 있음
+==>user_id와 declaration중에 하나만 주게 된다면 중복이 발생해서 update가 꼬일수도 있으니 주의해서 할 것
+
+※꺼내온 content(STT한 내용)가 blob으로 저장이 되어있기에 한글이 깨져서 나올수 있어서 
+한번 utf-8으로 인코딩해준 것
+
+==>여기까지
+----------------------------------------------------------------------------------------------------------------------------------
+==>ModelUpdate.py
+이 파일은 새로운 데이터셋이 어느정도 모였을때 실행을 시키는 파일로 modelupdate를 위해 
+DB에서 쌓아놓은 데이터들 중 utf8로 인코딩한 content칼럼과 결과값인 disdata칼럼을 모두 불러와서 
+X와 y라는 리스트에 각각 담고 DataFrame을 위한 {"document": X, "label": y} 칼럼을 만들어서 담고 df라는 객체에 담고
+Tokenizer와 fit의 과정을 거치면서 model을 완성을 시키고 어느 이전에 만들어진 model보다 성능이 떨어질 수 있으니
+model을 저장을 할때에 이름을 다르게 해서 저장을 하는 것(같은 이름으로 주게 되면 덮어쓰기 함)
+
+==>대충 질문들어올 거리들
+1.왜 flask를 썻냐?
+-->멀티스레드를 지원하지 않는 것은 알지만 model이 python코드로 돌아가다보니 작성을 하게 되었고 
+단일 스레드 작업으로도 충분해보였기 때문에 작성을 하게 되었다
+
+2.생각보다 작업이 오래걸리는데 비동기 방식을 쓸 생각은 없었나?
+-->
+
+--------------------------------------------------------------------------------------------------------------------------------------
+==>단독실행시 postman쓰는 방법
+1.python 파일을 실행시킨다
+2.postman을 연다 
+3.주소값을 맞춰준다
+4.send를 해서 연결이 되는지 확인
+5.결과값이 나오는지 확인
+사진으로도 첨부 할거다
