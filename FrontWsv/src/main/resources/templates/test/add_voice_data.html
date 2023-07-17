@@ -1,0 +1,51 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8">
+<head>
+    <title>upload</title>
+</head>
+<body>
+    <h2>회원 가입</h2>
+
+    <form class="m-s" role="form" th:action="@{/test/voice_data/add}"
+          action="#" id="loginForm" method="post">
+
+        <div class="form-group">
+            <input type="text"  name="userName" id="userName"
+                   class="form-control" placeholder="userName" required="required"/>
+        </div>
+
+        <div class="form-group">
+            <input type="tel" name="declaration" id="declaration"
+                   class="form-control" placeholder="declaration" required="required"/>
+        </div>
+
+        <div class="form-group">
+            <input type="text"  name="audioFile" id="audioFile"
+                   class="form-control" placeholder="audioFile" required="required"/>
+        </div>
+
+        <div class="form-group">
+            <input type="text"  name="content" id="content"
+                   class="form-control" placeholder="content" required="required"/>
+        </div>
+
+        <div class="form-group">
+            <input type="radio" name="disData" value="Y"> Yes <br>
+
+            <input type="radio" name="disData" value="N" checked> No <br>
+        </div>
+
+        <div class="form-group">
+            <input type="text"  name="createdDate" id="createdDate"
+                   class="form-control" placeholder="createdDate"/>
+        </div>
+
+        <button type="submit" class=>Signup</button>
+    </form>
+
+    <button type="button" class="btn btn-primary" onclick="history.go(-1)">redirect</button>
+
+<!--    "btn btn-primary block full-width m-b"-->
+
+</body>
+</html>

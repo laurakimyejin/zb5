@@ -1,0 +1,35 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<meta charset="UTF-8">
+<head>
+  <title>view</title>
+</head>
+<body>
+
+
+<h3>신고 목록</h3>
+<!--<form class="m-v" role="form" th:action="@{/view/info}"-->
+<!--      action="#" id="infoForm" method="post">-->
+<!--  <input type="text"  name="userName" id="userName" th:value="${userName}"-->
+<!--         class="form-control" placeholder="userName" required="required"/>-->
+  <h4 th:text="${userName}"></h4>
+
+  <table>
+    <tr><td>idx</td><td>신고된전화번호</td><td>판명여부</td><td>신고날짜</td></tr>
+    <tr th:each="data, idx : ${voiceData}">
+      <td th:text="${idx.index}"></td>
+      <td th:text="${data.declaration}"></td>
+      <td th:text="${data.disData}"></td>
+      <td th:text="${data.createdDate}"></td>
+    </tr>
+
+  </table>
+
+
+<!--  <button type="submit" class=>Request</button>-->
+<!--</form>-->
+
+
+
+  <button type="button" class="btn btn-primary" onclick="history.go(-1)">redirect</button>
+</body>
+</html>

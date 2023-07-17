@@ -1,0 +1,46 @@
+<html xmlns:th="http://www.thymeleaf.org">
+    </script>
+    <head>
+        <title>home shit home</title>
+    </head>
+    <body>
+    <th:block th:if="${userName != null}">
+        <div>
+            <h4><span th:text="${userName}"></span></h4>
+        </div>
+        <h4></h4>
+        <a href="/auth/logout">로그아웃</a>
+    </th:block>
+    <th:block th:if="${userName == 'plz login'}">
+        <h4></h4>
+        <a href="/auth/signup">회원가입</a>
+        <h4></h4>
+        <a href="/auth/loginForm">로그인</a>
+    </th:block>
+
+        <h4></h4>
+        <a href="/view/info">회원이 신고한 목록</a>
+        <h4></h4>
+        <a href="/view/loading">로딩창 테스트</a>
+        <h4></h4>
+        <a href="/view/VoiClaReq">신고하기</a>
+        <h4></h4>
+
+        <h4>dev</h4>
+        <h4></h4>
+        <a href="/test/addVoi">통화 테이블에 임시 데이터 추가하기</a>
+        <h4></h4>
+
+
+<!--        <th:block th:if="${cookie != null}">-->
+<!--            <div th:text="${cookie}"></div>-->
+<!--        </th:block>-->
+
+        <h4></h4>
+
+        <div th:text="@{${@environment.getProperty('url.py')} + ''}"></div>
+        <div th:text="@{${@environment.getProperty('url.api')} + ''}"></div>
+        <div th:text="@{${@environment.getProperty('url.adm')} + ''}"></div>
+    </body>
+</html>
+

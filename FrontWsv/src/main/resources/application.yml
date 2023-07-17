@@ -1,0 +1,69 @@
+file:
+  dir: C:/rest/
+
+url:
+#  app: http://127.0.0.1:5501
+#  api: http://127.0.0.1:5502
+#  py: http://127.0.0.1:5503
+
+  adm: http://127.0.0.1:9988
+  api: http://127.0.0.1:9989
+  py: http://127.0.0.1:9990
+#  최종버전에서는 스프링은 외부 IP를, py는 사설 IP를 사용해야함
+#  깃에 외부 IP를 노출하는 일이 없도록 주의
+server:
+#  web:
+#    resources:
+#      static-locations: classpath:/
+  tomcat:
+    threads:
+      max: 200
+      min-spare: 10
+    max-connections: 8192
+    accept-count: 100
+    connection-timeout: 30000
+  port: 9989
+spring:
+  profiles:
+    active: local
+#    group:
+#      local:
+#        -oauth
+#  http:
+#    nio: true
+  mvc:
+    async:
+      request-timeout: 30000
+  servlet:
+    multipart:
+      max-file-size: 999MB
+      max-request-size: 999MB
+  devtools:
+    livereload:
+      enabled: true
+  thymeleaf:
+    cache: false
+
+  datasource:
+    url: jdbc:mariadb://localhost:3306/TestPlace_01
+    username: root
+    password: hkit301301
+    driver-class-name: org.mariadb.jdbc.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.MariaDB106Dialect
+    properties:
+      hibernate:
+        hibernate:
+        "[format_sql]": true
+        "[user_sql_comments]": true
+        "[highlight_sql]": true
+        "[hbm2ddl.auto]": update
+    open-in-view: false
+    show-sql: true
+
+
+
+jwt:
+  key: 92808272306E591C5FC3306F6C349762306B63FA308C308B30533068306A304F6708306E5149304C716730893059306E306F3068304466145E7C306A65E5306E6E293082308A8A1861B6306B6B8B308B5E78305B306E611F899A306F4ECA3067306F624B306E767E3005304B306C5E7B65CB5F8B306F514930925BBF3055306C925B8272306E77B3306B305530566CE27ACB3066308B304C305D308C304C305F3069308A7740304F308B3079304D5FC3306F306A30446708306E5149306830683082306B305930793066306F6D88304853BB308A305D305730669B42306F5F775FA83046
+#  key: 銀色の夜、心は水面に揺れることなく　月の光が照らすのはとい昔幼な日の温もり記憶に残る幸せの感覚は今では手の百々かぬ幻旋律は光を宿さぬ鉛色の瞳にさざ波立てるがそれがたどり着くるべき心はない月の光とともにすべては消え去りそして魂は彷徨う
+#  key: GinIRoNoYoRu0KoKoRoHaSuIMenNiYuReRuKoToNaKu0TsuKiNoHiKaRiGaTeRaSuNoHaToIMuKaShiOSaNaHiNoNuKuMoRiKiOKuNiNoKoRuShiYaWaSeNoKanKaKuHaIMaDehaTeNoDoDoKaNuMaBoRoShiSenRiTsuHaHiKaRiWoYaDoSaNuNaMaRiIRoNoHiToMiNiSaZaNaMiTaTeRuGaSoReGaTaDoRiTsuKuRuBeKiKoKoRoHaNaITsuKiNoHiKaRiToToMoNiSuBeTeHaKiESaRiSoShiTeTaMaSiIHaShaMaYoU
