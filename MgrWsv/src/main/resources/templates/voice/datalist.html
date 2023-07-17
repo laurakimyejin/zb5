@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+  <th:block th:replace="/layout/header.html :: fragment-header"></th:block>
+  <style>
+    h2 {
+      text-align: center;
+    }
+
+  </style>
+</head>
+<div th:replace="/layout/nav.html :: fragment-nav"></div>
+<body>
+  <div class="container" style="max-width: 1000px">
+    <div class="py-5 text-center">
+      <h2>신고된 피싱 목록</h2>
+    </div>
+<!--    <div align="right">-->
+<!--      <button class="btn btn-warning" onclick="">다시분석하기</button>-->
+<!--    </div>-->
+<!--&lt;!&ndash;    <script src="/js/pythonScriptRunner.js"></script>&ndash;&gt;-->
+<!--    <br>-->
+<!--    <div align="right">-->
+<!--      <button class="btn btn-warning" onclick="">재학습결과 보기</button>-->
+<!--    </div>-->
+
+    <!--  검색창-->
+    <!--  <div>-->
+    <!--    <form th:object="${SearchForm}" method="POST" style="display: flex; justify-content: flex-end; padding: 10px 0;">-->
+    <!--       <input type="date" th:field="*{start}">-->
+    <!--        ~ <input type="date" th:field="*{end}">-->
+    <!--      <select th:field="*{searchType}">-->
+    <!--        <option value="username">작성자</option>-->
+    <!--        <option value="declaration">신고된 번호</option>-->
+    <!--      </select>-->
+    <!--      <input th:field="*{searchType}" type="text" placeholder="검색어를 입력하세요"/>-->
+    <!--      <input type="submit" value="검색"/>-->
+    <!--    </form>-->
+
+    <!--  </div>-->
+
+    <hr class="my-4">
+    <div>
+      <table class="table">
+        <thead>
+        <tr>
+          <th>No</th>
+          <th>파일명</th>
+          <th>작성자</th>
+          <th>신고된 번호</th>
+          <th>AI판별값</th>
+          <th>확률</th>
+          <th>수정판별값</th>
+          <th>변조여부</th>
+          <th>등록일</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="voicedata : ${voicedatas}">
+          <td th:text="${voicedata.id}">No.</td>
+          <td><a th:href="@{/voice/{id}(id=${voicedata.getId()})}" th:text="${voicedata.audio_file}"></a></td>
+          <td th:text="${voicedata.getUser.userid}">작성자</td>
+          <td th:text="${voicedata.declaration}">신고된 번호</td>
+          <td th:text="${voicedata.disdata}">AI판별값</td>
+          <td th:text="${voicedata.persent}">확률</td>
+          <td th:text="${voicedata.admindata}">재판별값</td>
+          <td th:text="${voicedata.mfcc}">변조여부</td>
+          <td th:text="${voicedata.created_date}">등록일</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div> <!-- /container -->
+  <footer th:replace="/layout/footer.html :: fragment-footer"></footer>
+</body>
+</html>

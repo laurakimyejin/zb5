@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <th:block th:replace="/layout/header.html :: fragment-header"></th:block>
+    <style>
+        h2 {
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+<div th:replace="/layout/nav.html :: fragment-nav"></div>
+<div sec:authorize="isAuthenticated()">
+    <div class="container">
+        <h3>관리자님 제로베이스에 오신것을 환영합니다</h3>
+    </div>
+</div>
+
+<div sec:authorize="isAnonymous()">
+    <div class="container">
+        <h2>로그인 후 이용하세요!</h2>
+    </div>
+</div>
+
+<footer th:replace="/layout/footer.html :: fragment-footer"></footer>
+</body>
+</html>

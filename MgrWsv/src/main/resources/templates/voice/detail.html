@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+  <th:block th:replace="/layout/header.html :: fragment-header"></th:block>
+  <style>
+    h2 {
+      text-align: center;
+    }
+
+  </style>
+</head>
+<div th:replace="/layout/nav.html :: fragment-nav"></div>
+<body>
+<div class="container">
+  <table class="table">
+<!--    <tr>-->
+<!--      <th>번호</th><td><span th:text="${voicedata.id}"></span></td>-->
+<!--    </tr>-->
+<!--    <tr>-->
+<!--      <th>작성자</th><td><span th:text="${voicedata.getUser().getUserid()}"></span></td>-->
+<!--    </tr>-->
+    <tr>
+      <th>신고된 번호</th><td><span><b><i th:text="${voicedata.declaration}"></i></b></span></td>
+    </tr>
+    <tr>
+      <th>AI판별값</th><td><span><b><i th:text="${voicedata.disdata}"></i></b></span></td>
+    </tr>
+    <tr>
+      <th>보이스피싱확률</th><td><span><b><i th:text="${voicedata.persent}"></i></b></span></td>
+    </tr>
+    <tr>
+      <th>수정판별값</th><td><span><b><i th:text="${voicedata.admindata}"></i></b></span></td>
+    </tr>
+    <tr>
+      <th>변조여부</th><td><span><b><i th:text="${voicedata.mfcc}"></i></b></span></td>
+    </tr>
+
+<!--    <tr>-->
+<!--      <th>등록일</th><td><span th:text="${board.createdDate}"></span></td>-->
+<!--    </tr>-->
+
+  </table>
+  <br>
+
+  <div class="container border p-3">
+    <div class="form-group">
+      <div class="title">파일명 : <span th:text="${voicedata.audio_file}"></span></div>
+    </div>
+    <div class="form-group">
+      <div class="content" th:utext="${voicedata.content}"></div>
+    </div>
+    <div align="right">
+      <button class="btn btn-secondary" onclick="history.back()">돌아가기</button>
+    </div>
+
+  </div>
+</div>
+<!--<script src="/js/board.js"></script>-->
+<footer th:replace="/layout/footer.html :: fragment-footer"></footer>
+</body>
+</html>
