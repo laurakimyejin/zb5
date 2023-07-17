@@ -1,5 +1,15 @@
 # -*- coding: utf-8 -*-
 
+#C:\Users\smoke\OneDrive\바탕 화면\project\YhdbPrj3213\PredictAsv
+#pip install tensorflow
+#pip install keras
+#pip install mariadb
+#pip install librosa
+#pip install flask
+#pip install flask_restx
+#pip install SpeechRecognition
+#pip install pydub
+
 from flask import Flask, request, jsonify
 from flask_restx import Api, Resource
 from keras.utils import pad_sequences
@@ -19,7 +29,7 @@ import re
 import logging
 
 #테스트 모드를 할때(단독실행)는 m4a폴더를 만들어주어야 한다.
-TEST_MODE = True
+TEST_MODE = True #서버랑 연동할때는 False
 M4A_PATH = "./m4a"
 
 #wav파일과 stt를 위한 잘린wav파일들을 저장하는 장소 만들어주기
@@ -149,8 +159,10 @@ def concatenate_texts(text_list):
 #model폴더에서 tokenizer_pre.pickle와 model_pre.h5 그리고 mfcc.h5불러오기
 with open("./model/tokenizer_pre.pickle", "rb") as f:
     tokenizer1 = pk.load(f)
-model1 = load_model("./model/model_pre.h5")
-model2 = load_model("./model/mfcc.h5")
+# model1 = load_model("./model/model_pre.h5")
+# model2 = load_model("./model/mfcc.h5")
+model1 = load_model(r"C:\model_pre.h5")
+model2 = load_model(r"C:\mfcc.h5")
 
 
 #tokenizer_pre.pickle와 model_pre.h5를 가지고 STT했던 텍스트 돌리고 결과값1 얻기
@@ -204,7 +216,6 @@ class HelloWorld(Resource):
         global SPLITWAV_PATH, WAV_PATH, portnumber, m4a_filename, M4A_PATH, TEST_MODE
         if request.method == 'POST':
             #spring서버에서 저장한 파일경로를 읽어서 m4a파일 찾기
-            #from은 spring과 연결을 할때쓰기, files는 단독실행시
             if TEST_MODE:
                 file = request.files["file"]
                 m4a_filename = os.path.join(M4A_PATH, file.filename)
