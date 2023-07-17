@@ -48,65 +48,18 @@ public class UserService {
         if (userDomain.getRating() == null) {
             userDomain.setRating("N");
         }// Rating이 설정되지 않았을 경우 디폴트값을 주듯이 "N"으로 set
-//        UserEntity user = UserEntity.builder()
-//                .userName(userDomain.getUserName())
-//                .password(BCrypt.hashpw(
-//                        userDomain.getPassword(), BCrypt.gensalt()))
-//                .phoneNumber(userDomain.getPhoneNumber())
-//                .rating("N")
-//                .build();
-//        UserEntity savedUser = userRepository.save(user);
 
         UserEntity savedUser = userRepository.save(userDomain.toEntity());
         return savedUser.toString();
     }
 
-//    public String userSave(Model model) {
-//        log.info("uNam: {}", model.getAttribute("userName"));
-//        log.info("pass: {}", model.getAttribute("password"));
-//        log.info("phNu: {}", model.getAttribute("phoneNumber"));
-//        UserEntity user = UserEntity.builder()
-//                .userName((String) model.getAttribute("userName"))
-//                .password((String) model.getAttribute("password"))
-//                .phoneNumber((String) model.getAttribute("phoneNumber"))
-//                .rating("N")
-//                .build();
-//        UserEntity savedUser = userRepository.save(user);
-//        return savedUser.toString();
-//    }
-
-//    public String userSave(String userName, String password, String phoneNumber) {
-//        log.info("uNam: {}", userName);
-//        log.info("pass: {}", password);
-//        log.info("phNu: {}", phoneNumber);
-//        UserEntity user = UserEntity.builder()
-//                .userName(userName)
-//                .password(password)
-//                .phoneNumber(phoneNumber)
-//                .rating("N")
-//                .build();
-//        UserEntity savedUser = userRepository.save(user);
-//        return savedUser.toString();
-//    }
-
     public UserEntity findByUserName(String userName) {
         return userRepository.findByUserName(userName)
                 .orElseThrow(IllegalAccessError::new);
-//                .orElseThrow(() -> new BusinessException(ErrorCode.USER_NOT_FOUND));
     }
 
-    public List<UserEntity> findByAll() {
-        return userRepository.findAll();
-    }
-
-//    public UserDomain userLogin(UserLoginRequest userLoginRequest) {
-//
-//        UserEntity user = findByUserName(userLoginRequest.getUserName());
-//        if (!user.getPassword().matches(userLoginRequest.getPassword())) {
-//            log.info("PsMa :{}","password dose not match");
-//            return new UserDomain();
-//        }
-//        log.info("PsMa :{}","password is match");
-//        return user.toDomain();
+//    public List<UserEntity> findByAll() {
+//        return userRepository.findAll();
 //    }
+
 }

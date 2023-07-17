@@ -24,12 +24,7 @@ public class TestController {
     @Value("${url.api}")
     private String urlApi;
 
-//    @PostMapping("/view/info")
-//    public ResponseEntity<?> showDeclarationInfo(
-//            Model model,
-//            @RequestParam("userName") String userName
-//    ) {}
-
+    //신고 내용을 보여주기 위해 통화테이블의 데이터를 임시로 추가하는 테스트용 API
     @PostMapping("/voice_data/add")
     public ResponseEntity<?> save(VoiceDataDomain voiceDataDomain) {
         log.info("data:{}", voiceDataDomain.toString());
@@ -38,15 +33,4 @@ public class TestController {
                 .body(voiceData);
     }
 
-
-    @GetMapping("/model")
-    public ResponseEntity<?> modelPost() {
-        return null;
-    }
-
-
-    @PostMapping("/model")
-    public ResponseEntity<?> modelGet() {
-        return null;
-    }
 }

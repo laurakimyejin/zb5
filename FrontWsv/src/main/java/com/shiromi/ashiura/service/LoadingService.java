@@ -15,6 +15,7 @@ public class LoadingService {
     @Value("${url.api}")
     private String urlApi;
 
+    //로딩창 만들려고 몸비튼 흔적
     public void nowLoading(ResultResponseDTO resultRes, String userName, String declaration) throws InterruptedException {
         log.info("_______:{}", resultRes);
         resultRes.setUserName(userName);

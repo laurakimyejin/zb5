@@ -34,11 +34,6 @@ public class VoiceDataService {
         return savedVoiceData.toString();
     }
 
-//    public VoiceDataEntity findByUserName(String userName) {
-//        return voiceDataRepository.findByUserName(userName)
-//                .orElseThrow(IllegalAccessError::new);
-//    }
-
     public List<VoiceDataEntity> findByUserNameAll(String userName) {
         return voiceDataRepository.findTop10ByUserNameOrderByCreatedDateDesc(userName);
     }

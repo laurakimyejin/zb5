@@ -14,6 +14,7 @@ public class UriUtil {
     @Value("${url.py}")
     private String urlPy;
 
+    //URI 빌드하다가 귀찮아서 만든 Util
     public URI uriApi(String mapping) {
         return UriComponentsBuilder
                 .fromUriString(urlApi)

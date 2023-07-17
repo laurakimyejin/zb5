@@ -53,25 +53,7 @@ public class UserEntity implements UserDetails {
         }
         return authorities;
         // rating을 ","로 구분해서 리스트로 정렬후 권한확인
-        // 아래는 소스였던 List타입의 rating을 사용하는 코드들
-
-//        return this.rating.stram()
-//                 .map(SimpleGrantedAuthority::new)
-//                 .collect(Collectors.toList());
-
-
-//        return new SimpleGrantedAuthority(this.rating)
-//                .collect(Collectors.toList());
-
     }
-
-
-//    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-//    private List<Authority> rating = new ArrayList<>();
-//    public void serRoles(List<Authority> role) {
-//        this.rating = role;
-//        role.forEach(o -> o.setUser(this));
-//    }
 
     @Builder
     public UserEntity(long id, String userName, String name, String password, String phoneNumber, String rating) {

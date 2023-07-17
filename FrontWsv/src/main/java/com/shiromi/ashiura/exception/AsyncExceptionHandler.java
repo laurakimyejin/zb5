@@ -5,6 +5,7 @@ import org.springframework.aop.interceptor.AsyncUncaughtExceptionHandler;
 
 import java.lang.reflect.Method;
 
+@Deprecated
 @Slf4j
 public class AsyncExceptionHandler implements AsyncUncaughtExceptionHandler {
 

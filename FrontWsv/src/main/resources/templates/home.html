@@ -1,34 +1,23 @@
 <html xmlns:th="http://www.thymeleaf.org">
-    </script>
-    <head>
-        <title>home shit home</title>
-    </head>
+<!--<link rel="stylesheet" href="css/common.css">-->
+<th:block th:replace="fragment/common :: html-head"></th:block>
+<th:block th:replace="fragment/common :: header"></th:block>
+
+
     <body>
-    <th:block th:if="${userName != null}">
-        <div>
-            <h4><span th:text="${userName}"></span></h4>
-        </div>
-        <h4></h4>
-        <a href="/auth/logout">로그아웃</a>
-    </th:block>
-    <th:block th:if="${userName == 'plz login'}">
-        <h4></h4>
-        <a href="/auth/signup">회원가입</a>
-        <h4></h4>
-        <a href="/auth/loginForm">로그인</a>
-    </th:block>
+
 
         <h4></h4>
-        <a href="/view/info">회원이 신고한 목록</a>
+        <a href="/view/info"><i>회원이 신고한 목록</i></a>
         <h4></h4>
-        <a href="/view/loading">로딩창 테스트</a>
+        <a href="/view/loading"><i>로딩창 테스트</i></a>
         <h4></h4>
-        <a href="/view/VoiClaReq">신고하기</a>
+        <a href="/view/VoiClaReq"><i>신고하기</i></a>
         <h4></h4>
 
         <h4>dev</h4>
         <h4></h4>
-        <a href="/test/addVoi">통화 테이블에 임시 데이터 추가하기</a>
+        <a href="/test/addVoi"><i>통화 테이블에 임시 데이터 추가하기</i></a>
         <h4></h4>
 
 
@@ -37,10 +26,7 @@
 <!--        </th:block>-->
 
         <h4></h4>
-
-        <div th:text="@{${@environment.getProperty('url.py')} + ''}"></div>
-        <div th:text="@{${@environment.getProperty('url.api')} + ''}"></div>
-        <div th:text="@{${@environment.getProperty('url.adm')} + ''}"></div>
+        <th:block th:replace="fragment/common :: footer"></th:block>
     </body>
 </html>
 

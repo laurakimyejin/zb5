@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+    <head th:fragment="html-head">
+        <meta charset="UTF-8">
+        <title>301project</title>
+        <link rel="stylesheet" href="https://unpkg.com/mvp.css">
+        <link rel="stylesheet"
+              href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
+    </head>
+
+<body>
+
+
+<header th:fragment="headerFragment">
+    <nav>
+        <a href="/"><img alt="home" src="/img/home.png" height="70"></a>
+        <div>
+
+            <th:block th:if="${userName != 'unknown'}">
+                <a href="#"><i th:text="${userName}"></i></a>
+                <a href="/auth/logout"><i>로그아웃</i></a>
+            </th:block>
+            <th:block th:if="${userName == 'unknown'}">
+                <a href="/auth/signup"><i>회원가입</i></a>
+                <a href="/auth/loginForm"><i>로그인</i></a>
+            </th:block>
+        </div>
+    </nav>
+</header>
+
+    <div th:fragment="footerFragment">
+        <footer>
+            <div>
+                <div th:text="@{${@environment.getProperty('url.py')} + ''}"></div>
+                <div th:text="@{${@environment.getProperty('url.api')} + ''}"></div>
+                <div th:text="@{${@environment.getProperty('url.adm')} + ''}"></div>
+            </div>
+        </footer>
+    </div>
+
+</body>
+</html>
