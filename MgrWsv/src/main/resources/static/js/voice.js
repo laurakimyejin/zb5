@@ -35,12 +35,36 @@ let index = {
     requestReroll: function (){
 
         const data = {
-            id: $("id").val(),
-            del
-        }
-        const con_check = confirm("재학습요청 하시겠습니까?");
-        if(con_check === true){
+            userid: $("#userid").val(),
+            declaration: $("#declaration").val()
+        };
 
+        var confirm = window.confirm("재학습 요청 하시겠습니까?");
+
+        if(confirm){
+            $.ajax({
+                type: "PUT",
+                url: "/api/text/{userid}/{declaration}",
+                data: JSON.stringify(data),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json"
+            }).done(function() {
+                alert("요청되었습니다");
+            }).fail(function (error){
+                alert("실패했습니다.")
+            });
+            // var xhr = new XMLHttpRequest();
+            // //set the request method to POST
+            // xhr.open("POST" , "/api/text/"+ userid + declaration);
+            // //send request
+            // xhr.send();
+            //
+            // //check the request status code
+            // if(xhr.status === 200){
+            //     alert("요청되었습니다");
+            // }else{
+            //     alert("실패했습니다.");
+            // }
         }
     }
 }

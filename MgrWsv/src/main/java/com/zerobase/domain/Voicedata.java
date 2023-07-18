@@ -54,7 +54,7 @@ public class Voicedata {
     private LocalDate modified_date;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "idx")
     private User user;
 
     public VoicedataDto toDto(){

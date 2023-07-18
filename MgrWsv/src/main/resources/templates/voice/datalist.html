@@ -17,8 +17,9 @@
     <h2>신고된 피싱 목록</h2>
   </div>
       <div align="right">
-        <button id = "btn-request-reoll" class="btn btn-warning">재학습 요청하기</button>
+        <button onclick="requestReroll()" class="btn btn-warning">재학습 요청하기</button>
       </div>
+      <script src="/js/rerollrequest.js"></script>
   <br>
   <!--&lt;!&ndash;    <script src="/js/pythonScriptRunner.js"></script>&ndash;&gt;-->
   <!--    <br>-->
@@ -76,4 +77,5 @@
 </div> <!-- /container -->
 <footer th:replace="/layout/footer.html :: fragment-footer"></footer>
 </body>
+
 </html>
