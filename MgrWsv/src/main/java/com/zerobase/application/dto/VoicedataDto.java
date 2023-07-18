@@ -11,33 +11,33 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class VoicedataDto {
 
-        private Long id;
-        private String audio_file;
-        private String content;
-        private String declaration;
-        private String disdata;//판별
-        private String persent;//판별값확률
-        private String admindata;
-        private String reroll;//재학습된거 확률
-        private String mfcc;//변조
-        private LocalDate created_date;
-        private LocalDate modified_date;
-        private User user;
+    private Long id;
+    private String audio_file;
+    private String content;
+    private String declaration;
+    private String disdata;//판별
+    private String persent;//판별값확률
+    private String admindata;
+    private String reroll;//재학습된거 확률
+    private String mfcc;//변조
+    private LocalDate created_date;
+    private LocalDate modified_date;
+    private User user;
 
-        /*Dto->entity*/
-        public Voicedata toEntity(){
-            return Voicedata.builder()
-                    .id(id)
-                    .audio_file(audio_file)
-                    .content(content)
-                    .declaration(declaration)
-                    .disdata(disdata)
-                    .persent(persent)
-                    .admindata(admindata)
-                    .reroll(reroll)
-                    .mfcc(mfcc)
-                    .user(user)
-                    .build();
+    /*Dto->entity*/
+    public Voicedata toEntity(){
+        return Voicedata.builder()
+                .id(id)
+                .audio_file(audio_file)
+                .content(content)
+                .declaration(declaration)
+                .disdata(disdata)
+                .persent(persent)
+                .admindata(admindata)
+                .reroll(reroll)
+                .mfcc(mfcc)
+                .user(user)
+                .build();
 
 //            return voicedata;
 
@@ -62,21 +62,21 @@ public class VoicedataDto {
 //        private final LocalDate modified_date;
 //        private final Long userIdx;
 
-        //Entity->Dto
-        public VoicedataDto toDto(Voicedata voicedata){
-            this.id=voicedata.getId();
-            this.audio_file=voicedata.getAudio_file();
-            this.content= voicedata.getContent();
-            this.declaration=voicedata.getDeclaration();
-            this.disdata=voicedata.getDisdata();
-            this.persent=voicedata.getPersent();
-            this.admindata=voicedata.getAdmindata();
-            this.reroll=voicedata.getReroll();
-            this.mfcc=voicedata.getMfcc();
-            this.created_date=voicedata.getCreated_date();
-            this.modified_date=voicedata.getModified_date();
-            this.user=voicedata.getUser();
-            return this;
-        }
+    //Entity->Dto
+    public VoicedataDto toDto(Voicedata voicedata){
+        this.id=voicedata.getId();
+        this.audio_file=voicedata.getAudio_file();
+        this.content= voicedata.getContent();
+        this.declaration=voicedata.getDeclaration();
+        this.disdata=voicedata.getDisdata();
+        this.persent=voicedata.getPersent();
+        this.admindata=voicedata.getAdmindata();
+        this.reroll=voicedata.getReroll();
+        this.mfcc=voicedata.getMfcc();
+        this.created_date=voicedata.getCreated_date();
+        this.modified_date=voicedata.getModified_date();
+        this.user=voicedata.getUser();
+        return this;
+    }
 
 }

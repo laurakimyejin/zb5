@@ -74,7 +74,7 @@ public class Voicedata {
                 .build();
     }
 
-//    public void update(String disdata){
-//        this.disdata = disdata;
-//    }
+    public void update(String admindata){
+        this.admindata = admindata;
+    }
 }

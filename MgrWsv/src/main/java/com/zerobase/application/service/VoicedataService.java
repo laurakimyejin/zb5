@@ -27,6 +27,15 @@ public class VoicedataService {
 
     //create
 
+    //update
+    @Transactional
+    public void update(Long id, VoicedataDto dto){
+        Voicedata voicedata = voicedataRepository.findById(id).orElseThrow(()->
+                new IllegalArgumentException("없다구ㅠ. id=" + id));
+
+        voicedata.update(dto.getAdmindata());
+    }
+
     //페이징 처리한 전체목록
     @Transactional
     public Page<Voicedata> list(Pageable pageable){

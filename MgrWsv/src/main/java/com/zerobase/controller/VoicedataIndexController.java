@@ -25,7 +25,7 @@ public class VoicedataIndexController {
     //전체 보기
     @GetMapping("/")
     public String index(Model model, @PageableDefault(sort = "id", direction = Sort.Direction.DESC)
-                        Pageable pageable){
+    Pageable pageable){
         Page<Voicedata> voicedata = voicedataService.list(pageable);
         model.addAttribute("voicedatas", voicedata);
 
@@ -36,19 +36,35 @@ public class VoicedataIndexController {
     /*전체 목록 읽어오기*/
     @GetMapping("/voice/list")
     public String dataList(Model model, @PageableDefault(size = 5, sort = "id", direction = Sort.Direction.DESC)
-                            Pageable pageable){
+    Pageable pageable){
         Page<Voicedata> voicedata = voicedataService.list(pageable);
         model.addAttribute("voicedatas", voicedata);
         return "voice/datalist";
 
     }
 
-    @GetMapping("/voice/{id}")
+    //상세보기
+    @GetMapping("/voice/read/{id}")
     public String read (@PathVariable Long id, Model model) {
         VoicedataDto dto = voicedataService.findById(id);
         model.addAttribute("voicedata", dto);
         return "voice/detail";
     }
+
+    //재학습된 목록읽어오기
+    @GetMapping("/voice/retrain")
+    public String reList(Model model, @PageableDefault(size = 5, sort = "id", direction = Sort.Direction.DESC)
+                         Pageable pageable){
+        Page<Voicedata> voicedata = voicedataService.list(pageable);
+        model.addAttribute("voicedatas", voicedata);
+        return "voice/retrained";
+    }
+
+    //수정하기
+//    @GetMapping("/voice/read/{id}")
+//    public String updated(@PathVariable Long id, Model model) {
+//        VoicedataDto dto = voicedataService.findById(id)
+//    }
 
 
 
