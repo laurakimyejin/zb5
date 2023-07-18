@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 
 @NoArgsConstructor
@@ -39,9 +40,30 @@ public class VoiceDataEntity {
     @Column(name="created_date", columnDefinition = "TIMESTAMP DEFAULT NOW()")
     private String createdDate;
 
-    @Builder
+    @Column(nullable = false)
+    private String persent;
 
-    public VoiceDataEntity(Long id, String userName, String declaration, String audioFile, String content, String disData, String createdDate) {
+    //관리자가 지정한 결과값
+    @Column(nullable = true)
+    private String admindata;
+
+    //재학습된 결과 확률
+    @Column(nullable = true)
+    private String reroll;
+
+    //변조
+    @Column(nullable = false)
+    private String mfcc;
+
+    //재학습된(수정된)날짜
+    @Column
+    private LocalDate modified_date;
+
+    @Builder
+    public VoiceDataEntity(long id, String userName, String declaration,
+                           String audioFile, String content, String disData,
+                           String createdDate, String persent,String admindata,
+                           String reroll, String mfcc, LocalDate modified_date) {
         this.id = id;
         this.userName = userName;
         this.declaration = declaration;
@@ -49,6 +71,11 @@ public class VoiceDataEntity {
         this.content = content;
         this.disData = disData;
         this.createdDate = createdDate;
+        this.persent = persent;
+        this.admindata = admindata;;
+        this.reroll = reroll;
+        this.mfcc = mfcc;
+        this.modified_date = modified_date;
     }
     public VoiceDataDomain toDomain() {
         return VoiceDataDomain.builder()
@@ -58,6 +85,11 @@ public class VoiceDataEntity {
                 .content(content)
                 .disData(disData)
                 .createdDate(createdDate)
+                .persent(persent)
+                .admindata(admindata)
+                .reroll(reroll)
+                .mfcc(mfcc)
+                .modified_date(modified_date)
                 .build();
     }
 }

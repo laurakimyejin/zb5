@@ -30,12 +30,15 @@ public class viewController {
     @Value("${url.api}")
     private String urlApi;
 
-    //home sweet home
     @GetMapping("/")
     public String home(
+//            @CookieValue(value = "Bearer", required = false) String token,
             @AuthenticationPrincipal User user, //url을 입력하면 스프링 시큐리티에서 헤더로 전달된 쿠키(토큰)을 읽어서 사용자를 확인하는데, 그 인증과정에서 사용한 객체를 주입함
             Model model)   {
         log.info("View: {}", urlApi + "/");
+//        if (token != null) {
+//            log.info("token: {}",token);
+//            String user = jwtProvider.showClaims(token);
         if (user != null) {
             model.addAttribute("userName", user.getUsername());
         } else {

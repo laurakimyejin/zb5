@@ -2,7 +2,7 @@
 <th:block th:replace="fragment/common :: html-head"></th:block>
 <th:block th:replace="fragment/common :: header"></th:block>
 <body>
-    <h2>회원 가입</h2>
+    <h2>통화 테이블 데이터 임시 추가</h2>
 
     <form class="m-s" role="form" th:action="@{/test/voice_data/add}"
           action="#" id="loginForm" method="post">
@@ -10,33 +10,51 @@
         <div class="form-group">
             <input type="text"  name="userName" id="userName"
                    class="form-control" placeholder="userName" required="required"/>
-        </div>
+        </div> <!-- 유저 아이디 -->
 
         <div class="form-group">
             <input type="tel" name="declaration" id="declaration"
                    class="form-control" placeholder="declaration" required="required"/>
-        </div>
+        </div> <!-- 신고 전화번호 -->
 
         <div class="form-group">
             <input type="text"  name="audioFile" id="audioFile"
                    class="form-control" placeholder="audioFile" required="required"/>
-        </div>
+        </div> <!-- 신고들어온 오디오 파일명 -->
 
         <div class="form-group">
             <input type="text"  name="content" id="content"
                    class="form-control" placeholder="content" required="required"/>
-        </div>
-
+        </div> <!-- STT 변환 문자열 -->
+        <span> 판별 결과값 </span>
         <div class="form-group">
             <input type="radio" name="disData" value="Y"> Yes <br>
 
             <input type="radio" name="disData" value="N" checked> No <br>
-        </div>
+        </div> <!-- 판별 결과값 ex : 0 or 1 -->
 
         <div class="form-group">
-            <input type="text"  name="createdDate" id="createdDate"
-                   class="form-control" placeholder="createdDate"/>
-        </div>
+            <input type="text"  name="persent" id="persent"
+                   class="form-control" placeholder="persent"/>
+        </div> <!-- 모델 결과 퍼센트 ex : 0.98882  -->
+
+        <div class="form-group">
+            <input type="text"  name="admindata" id="admindata"
+                   class="form-control" placeholder="admindata"/>
+        </div> <!-- 관리자 임의 판단값 ex : 1 or 0  -->
+
+        <div class="form-group">
+            <input type="text"  name="reroll" id="reroll" value ="0"
+                   class="form-control" placeholder="reroll"/>
+        </div> <!-- 재학습해서 나온 퍼센트 ex : 0.98882 -->
+
+        <div class="form-group">
+            <input type="text"  name="mfcc" id="mfcc"
+                   class="form-control" placeholder="mfcc"/>
+        </div> <!-- 음성변조판별결과 ex : 0.87722 -->
+
+
+
 
         <button type="submit" class=>Signup</button>
     </form>

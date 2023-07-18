@@ -26,6 +26,11 @@ public class VoiceDataService {
                             .content(voiceDataDomain.getContent())
                             .disData(voiceDataDomain.getDisData())
                             .createdDate(null)
+                            .persent(voiceDataDomain.getPersent())
+                            .admindata(voiceDataDomain.getAdmindata())
+                            .reroll(voiceDataDomain.getReroll())
+                            .mfcc(voiceDataDomain.getMfcc())
+                            .modified_date(null)
                             .build();
         VoiceDataEntity savedVoiceData = voiceDataRepository.save(voiceData);
         log.info(savedVoiceData.toString());

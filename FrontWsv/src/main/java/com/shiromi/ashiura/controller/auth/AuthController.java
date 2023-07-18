@@ -49,9 +49,9 @@ public class AuthController {
         log.info("data: {}", userLoginRequestXML.toString());
         //토큰 발급
         TokenInfo tokenInfo = userService.userLogin(userLoginRequestXML);
-        //쿠키 생성, 리스폰스 쿠키를 만들지만 빌드체인이 편해서 걍 이거씀
+        //쿠키 생성
         ResponseCookie cookie = ResponseCookie.from(tokenInfo.getGrantType(), tokenInfo.getAccessToken())
-                .maxAge(3600) // 1시간
+                .maxAge(3600)
                 .path("/")
                 .secure(false) // ture = url이 https가 아니면 쿠키 저장안하는 기능, 실제 배포시에는 https를 써서 데이터 암호화를 해야 보안이슈가 생길 가능성이 없다
                 .sameSite("Lax") //서드파티 보안문제
@@ -71,6 +71,6 @@ public class AuthController {
         log.info("UsDo: {}", userDomain.toString());
         log.info("save: {}", userService.userSave(userDomain));
 
-        return "/auth/login";
+        return "/auth/loginForm";
     }
 }

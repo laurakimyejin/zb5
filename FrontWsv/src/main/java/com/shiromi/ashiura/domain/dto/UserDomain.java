@@ -16,15 +16,20 @@ public class UserDomain {
     private String password;
     private String phoneNumber;
     private String rating;
+    private String provider;
+    private String providerId;
 
     @Builder
-    public UserDomain(String userName, String name, String password, String phoneNumber, String rating) {
+    public UserDomain(String userName, String name, String password, String phoneNumber,
+                      String rating, String provider, String providerId) {
 
         this.userName = userName;
         this.name = name;
         this.password = password;
         this.phoneNumber = phoneNumber;
         this.rating = rating;
+        this.provider = provider;
+        this.providerId = providerId;
     }
     public UserEntity toEntity() {
         return UserEntity.builder()
@@ -33,6 +38,8 @@ public class UserDomain {
                 .password(password)
                 .phoneNumber(phoneNumber)
                 .rating(rating)
+                .provider(provider)
+                .provider(providerId)
                 .build();
     }
 

@@ -4,6 +4,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @NoArgsConstructor
 @Data
 public class VoiceDataDomain {
@@ -15,9 +17,17 @@ public class VoiceDataDomain {
     String content;
     String disData;
     String createdDate;
+    String persent;
+    String admindata;
+    String reroll;
+    String mfcc;
+    LocalDate modified_date;
 
     @Builder
-    public VoiceDataDomain(long id, String userName, String declaration, String audioFile, String content, String disData, String createdDate) {
+    public VoiceDataDomain(long id, String userName, String declaration,
+                           String audioFile, String content, String disData,
+                           String createdDate, String persent,String admindata,
+                           String reroll, String mfcc, LocalDate modified_date) {
         this.id = id;
         this.userName = userName;
         this.declaration = declaration;
@@ -25,6 +35,11 @@ public class VoiceDataDomain {
         this.content = content;
         this.disData = disData;
         this.createdDate = createdDate;
+        this.persent = persent;
+        this.admindata = admindata;;
+        this.reroll = reroll;
+        this.mfcc = mfcc;
+        this.modified_date = modified_date;
     }
     public VoiceDataDomain toEntity() {
         return VoiceDataDomain.builder()
@@ -35,6 +50,11 @@ public class VoiceDataDomain {
                 .content(content)
                 .disData(disData)
                 .createdDate(createdDate)
+                .persent(persent)
+                .admindata(admindata)
+                .reroll(reroll)
+                .mfcc(mfcc)
+                .modified_date(modified_date)
                 .build();
     }
 }
