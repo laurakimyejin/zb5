@@ -33,7 +33,8 @@ public class WebSecurityConfigure {
                 .authorizeRequests()
                 .antMatchers("/view/**","/test/**","api/**").hasRole("N") //해당 권한을 가진 경우
 //                .antMatchers().hasRole("Y")
-                .antMatchers("/","/err/**","/auth/**","/justwait").permitAll() //권한 유무따지지 않고 모두 접근
+                .antMatchers("/","/err/**","/auth/**","/justwait","/img/**").permitAll() //권한 유무따지지 않고 모두 접근
+//                .antMatchers("/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling().accessDeniedHandler(webAccessDeniedHandler)

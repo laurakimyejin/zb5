@@ -10,8 +10,8 @@ url:
 #  api: http://127.0.0.1:9989
 #  py: http://127.0.0.1:9990
 
-  api: http://127.0.0.1:9965
-  py: http://127.0.0.1:9977
+  api: http://127.0.0.1:5502
+  py: http://127.0.0.1:5503
 
 #  최종버전에서는 스프링은 외부 IP를, py는 사설 IP를 사용해야함
 #  깃에 외부 IP를 노출하는 일이 없도록 주의
@@ -26,7 +26,7 @@ server:
     max-connections: 8192
     accept-count: 100
     connection-timeout: 30000
-  port: 9965
+  port: 5502
 spring:
   profiles:
     active: local
@@ -49,7 +49,7 @@ spring:
     cache: false
 
   datasource:
-    url: jdbc:mariadb://localhost:3306/TestPlace_01
+    url: jdbc:mariadb://localhost:3306/Testplace_02
     username: root
     password: hkit301301
     driver-class-name: org.mariadb.jdbc.Driver
