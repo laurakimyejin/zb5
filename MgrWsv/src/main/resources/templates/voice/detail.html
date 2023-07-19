@@ -34,10 +34,10 @@
             <th>AI판별값</th><td><span><b><i th:text="${voicedata.disdata}"></i></b></span></td>
         </tr>
         <tr>
-            <th>보이스피싱확률</th><td><span><b><i th:text="${voicedata.persent}"></i></b></span></td>
+            <th>AI확률</th><td><span><b><i th:text="${voicedata.persent}"></i></b></span></td>
         </tr>
         <tr>
-            <th>수정판별값</th><td><span><b><i th:text="${voicedata.admindata}"></i></b></span></td>
+            <th>관리자판별값</th><td><span><b><i th:text="${voicedata.admindata}"></i></b></span></td>
         </tr>
         <tr>
             <th>변조여부</th><td><span><b><i th:text="${voicedata.mfcc}"></i></b></span></td>
@@ -60,7 +60,8 @@
                 <option value="1">1</option>
                 <option value="0">0</option>
             </select>
-            <button id="btn-admindata-submit"class="btn btn-primary">제출</button>
+            <button class="btn btn-primary" onclick="adminSubmit()">제출</button>
+            <script src="/js/adminSubmit.js"></script>
         </form>
     </div>
 
@@ -80,39 +81,4 @@
 <!--<script src="/js/board.js"></script>-->
 <footer th:replace="/layout/footer.html :: fragment-footer"></footer>
 </body>
-<script>
-    let index = {
-        init: function () {
-            $("#btn-admindata-submit").on("click", () => {
-                this.submit();
-            });
-        },
-
-        submit: function () {
-            const data = {
-                id: $("#id").val(),
-                admindata: $("#admindata").val()
-            };
-
-            const con_check = confirm("제출하시겠습니까?");
-            if(con_check === true){
-                $.ajax({
-                    type: "PUT",
-                    url: "/api/voice/" + data.id,
-                    data: JSON.stringify(data),
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json"
-                }).done(function () {
-                    alert("제출하였습니다");
-                    location.href = "/voice/read/" + data.id;
-                }).fail(function (error) {
-                    alert(JSON.stringify(error));
-                });
-            }
-
-        },
-    }
-
-    index.init();
-</script>
 </html>

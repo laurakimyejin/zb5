@@ -2,12 +2,26 @@ server:
   port: 8989
   
 spring:
+  devtools:
+    livereload:
+      enabled: true
+    restart:
+      enabled: true
+    thymeleaf:
+      cache: false
+
   datasource:
-    #mariadb는 자신이 사용하고자 하는 스키마를 입력해야지 들어가짐.
-    url: jdbc:mariadb://182.229.34.184:3306/301project
+
+    url: jdbc:mariadb://127.0.0.1:3306/sample
     username: root
-    password: hkit301301
+    password: 1234
     driver-class-name: org.mariadb.jdbc.Driver
+
+    #mariadb는 자신이 사용하고자 하는 스키마를 입력해야지 들어가짐.
+#    url: jdbc:mariadb://182.229.34.184:3306/301project
+#    username: root
+#    password: hkit301301
+#    driver-class-name: org.mariadb.jdbc.Driver
 
 
   jpa:
@@ -87,5 +101,7 @@ logging:
 
     boardexample:
       myboard: info
+
+
       
       

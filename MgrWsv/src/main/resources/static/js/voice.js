@@ -1,3 +1,5 @@
+// 인덱스로 쓰고 싶었지만 자꾸 안먹혀서 보류, 따로 빼놨음
+
 let index = {
     init: function () {
         $("#btn-admindata-submit").on("click", () => {

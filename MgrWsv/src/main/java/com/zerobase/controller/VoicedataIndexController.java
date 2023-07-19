@@ -22,7 +22,7 @@ public class VoicedataIndexController {
     @Autowired
     private final VoicedataService voicedataService;
 
-    //전체 보기
+    //초기화면
     @GetMapping("/")
     public String index(Model model, @PageableDefault(sort = "id", direction = Sort.Direction.DESC)
     Pageable pageable){

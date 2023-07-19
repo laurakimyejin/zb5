@@ -1,7 +1,7 @@
 function requestReroll(){
 
     const data = {
-        userid: $("#userid").val(),
+        idx: $("#idx").val(),
         declaration: $("#declaration").val()
     };
 
@@ -10,7 +10,7 @@ function requestReroll(){
     if(confirm) {
         $.ajax({
             type: "POST",
-            url: "/api/text/{userid}/{declaration}",
+            url: "/api/text/{idx}/{declaration}",
             data: JSON.stringify(data),
             contentType: "application/json; charset=utf-8",
             dataType: "json"
