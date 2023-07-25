@@ -1,3 +1,4 @@
+//관리자가 임의로 데이터를 admindata에 집어넣는 코드
 function adminSubmit() {
     const data = {
         id: $("#id").val(),

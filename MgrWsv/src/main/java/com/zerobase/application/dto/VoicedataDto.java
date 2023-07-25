@@ -25,7 +25,7 @@ public class VoicedataDto {
     private User user;
 
     /*Dto->entity*/
-    public Voicedata toEntity(){
+    public Voicedata toEntity(Long idx){
         return Voicedata.builder()
                 .id(id)
                 .audio_file(audio_file)

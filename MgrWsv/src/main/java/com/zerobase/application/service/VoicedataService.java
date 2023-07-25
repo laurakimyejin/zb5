@@ -9,11 +9,15 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -72,25 +76,45 @@ public class VoicedataService {
 
 
     //search
+//    @Transactional
+//    public Page<Voicedata> search(Pageable pageable, Voicedata.SearchForm form) {
+//        if (form.getSearchType().equals("disdata")) {
+//            return voicedataRepository.searchAllByDecl(pageable, form.getStart().toString(), form.getEnd().toString(), form.getKeyword());
+//        } else {
+//            return voicedataRepository.searchAllByUserId(pageable, form.getStart().toString(), form.getEnd().toString(), form.getKeyword());
+//        }
+//    }
+
+
 //    @Transactional(readOnly = true)
 //    public Page<Voicedata> search(String keyword, Pageable pageable){
 //        Page<Voicedata> voicedataList = voicedataRepository.findByDeclaration(keyword, pageable);
 //        return voicedataList;
 //    }
 
-    //reroll
+    /*재학습 요청 service*/
     @Transactional
     public void reroll(VoicedataDto dto, Long idx, String declaration){
+        log.info("service 1");
+        log.info("service 1 " + idx);
         URI uri = UriComponentsBuilder
                     .fromUriString("http://127.0.0.1:5000")
                     .path("/api/text/{idx}/{declaration}")
                     .encode()
                     .build()
-                    .expand(dto.getUser().getIdx(),dto.getDeclaration())
+                    .expand(idx,dto.getDeclaration())
                     .toUri();
-//
+        log.info("service 2");
+        log.info("service 2 " + idx);
+//        log.info("",uri);
+
         MultiValueMap<String, String> MVMap = new LinkedMultiValueMap<>();
-        MVMap.add("file", dto.getContent());
+        log.info("service 3");
+        log.info("service 3 " + idx);
+        MVMap.add("text", dto.getContent());
+        log.info(dto.getContent());
+        log.info("service 4");
+        log.info("service 4 " + idx);
 //신호보내기
         WebClient.create().post()
                 .uri(uri)
@@ -99,14 +123,34 @@ public class VoicedataService {
                 .retrieve()
                 .toEntity(String.class)
                 .subscribe();
-//        log.info("VoiClaReq post success");
+        log.info("VoiClaReq post success");
+        log.info("service 5 " + idx);
 
+    }
 
+    /*모델 업데이트 요청 service*/
+    @Transactional
+    public void updatemodel(){
+        log.info("service 1");
+        URI uri = UriComponentsBuilder
+                .fromUriString("http://127.0.0.1:5000")
+                .path("/api/modelupdate/")
+                .encode()
+                .build()
+                .expand()
+                .toUri();
 
+        log.info("service 2");
+        HttpEntity<Void> request = new HttpEntity<>(null, null);
 
+        log.info("service 3");
 
+        RestTemplate restTemplate = new RestTemplate();
 
+        log.info("service 4");
+        ResponseEntity<Void> response = restTemplate.exchange(uri, HttpMethod.GET, request, Void.class);
 
+        log.info("service 5");
     }
 
 }

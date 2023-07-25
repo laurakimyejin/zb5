@@ -16,10 +16,20 @@
   <div class="py-5 text-center">
     <h2>신고된 피싱 목록</h2>
   </div>
-      <div align="right">
-        <button onclick="requestReroll()" class="btn btn-warning">재학습 요청하기</button>
-      </div>
-      <script src="/js/requestReroll.js"></script>
+<!--  기간별 검색-->
+<!--  <form th:action="@{/voice/voicesearch}" th:object="${SearchForm}" method="POST" style="display: flex; justify-content: flex-end; padding: 10px 0;">-->
+<!--    <input type="date" th:field="*{start}">-->
+<!--    ~-->
+<!--    <input type="date" th:field="*{end}">-->
+<!--    <select th:field="*{searchType}">-->
+<!--      <option value="userid">작성자</option>-->
+<!--      <option value="declaration">신고번호</option>-->
+<!--    </select>-->
+<!--    <input th:field="*{keyword}" type="text" placeholder="검색어를 입력하세요."/>-->
+<!--    <input type="submit" value="검색"/>-->
+<!--  </form>-->
+
+
   <br>
   <!--&lt;!&ndash;    <script src="/js/pythonScriptRunner.js"></script>&ndash;&gt;-->
   <!--    <br>-->

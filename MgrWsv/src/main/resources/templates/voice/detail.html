@@ -27,9 +27,29 @@
         <!--    <tr>-->
         <!--      <th>작성자</th><td><span th:text="${voicedata.getUser().getUserid()}"></span></td>-->
         <!--    </tr>-->
+
+
+
+
+
+<!--        <tr>-->
+<!--            <th>신고된 번호</th><td><span><b><i th:text="${voicedata.declaration}"></i></b></span></td>-->
+<!--        </tr>-->
         <tr>
+            신고된번호<input type="hidden" id="dec" th:value="${voicedata.declaration}">
             <th>신고된 번호</th><td><span><b><i th:text="${voicedata.declaration}"></i></b></span></td>
         </tr>
+<!--        <tr>-->
+<!--            <th>유저고유번호</th><td><span><b><i th:text="${voicedata.getUser.idx}"></i></b></span></td>-->
+<!--        </tr>-->
+        <tr>
+            유저번호<input type="hidden" id="idx" th:value="${voicedata.getUser.idx}">
+            <th>유저고유번호</th><td><span><b><i th:text="${voicedata.getUser.idx}"></i></b></span></td>
+        </tr>
+
+
+
+
         <tr>
             <th>AI판별값</th><td><span><b><i th:text="${voicedata.disdata}"></i></b></span></td>
         </tr>
@@ -70,6 +90,7 @@
             <div class="title">파일명 : <span th:text="${voicedata.audio_file}"></span></div>
         </div>
         <div class="form-group">
+            내용<input type="hidden" id="content" th:value="${voicedata.content}">
             <div class="content" th:utext="${voicedata.content}"></div>
         </div>
         <div align="right">
@@ -77,6 +98,10 @@
         </div>
 
     </div>
+    <div align="right">
+        <button onclick="requestReroll()" class="btn btn-warning">재학습 요청하기</button>
+    </div>
+    <script src="/js/requestReroll.js"></script>
 </div>
 <!--<script src="/js/board.js"></script>-->
 <footer th:replace="/layout/footer.html :: fragment-footer"></footer>

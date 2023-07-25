@@ -2,6 +2,7 @@ package com.zerobase.domain;
 
 import com.zerobase.application.dto.VoicedataDto;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -72,6 +73,19 @@ public class Voicedata {
                 .modified_date(modified_date)
                 .user(user)
                 .build();
+    }
+
+    @Data
+    public class SearchForm {
+
+        @DateTimeFormat(pattern = "yyyy-MM-dd")
+        private LocalDate start;
+
+        @DateTimeFormat(pattern = "yyyy-MM-dd")
+        private LocalDate end;
+
+        private String searchType;
+        private String keyword;
     }
 
     public void update(String admindata){

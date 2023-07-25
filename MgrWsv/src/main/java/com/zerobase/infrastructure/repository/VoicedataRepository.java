@@ -18,6 +18,17 @@ public interface VoicedataRepository extends JpaRepository<Voicedata, Long> {
             countQuery = "SELECT COUNT(v) FROM Voicedata v JOIN v.user")
     Page<Voicedata> findAllWithUser(Pageable pageable);
 
+    /*기간별 검색*/
+//        //신고된 번호별 검색
+//    @Query("SELECT v FROM Voicedata v JOIN FETCH v.user WHERE v.created_date BETWEEN :start AND :end AND v.userid = :userid")
+////    @Query("SELECT v FROM Voicedata v JOIN User u ON v.user = u.userid WHERE v.created_date BETWEEN :start AND :end AND u.userid = :userid")
+//    Page<Voicedata> searchAllByUserId(Pageable pageable, @Param("start") String start, @Param("end") String end, @Param("userid") String userid);
+//
+//
+//    @Query("SELECT v FROM Voicedata v WHERE v.created_date BETWEEN :start AND :end AND v.declaration = :declaration")
+//    Page<Voicedata> searchAllByDecl(Pageable pageable, @Param("start") String start, @Param("end") String end, @Param("declaration") String declaration);
+
+
 //    Page<Voicedata> findByDeclaration(Pageable pageable);
 //    Page<Voicedata> findAllWithUser(Pageable pageable);
 }

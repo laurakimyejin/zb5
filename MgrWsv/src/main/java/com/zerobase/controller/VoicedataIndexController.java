@@ -3,6 +3,7 @@ package com.zerobase.controller;
 import com.zerobase.application.service.VoicedataService;
 import com.zerobase.domain.Voicedata;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import com.zerobase.application.dto.VoicedataDto;
 import org.springframework.web.bind.annotation.PathVariable;
 
+@Slf4j
 @RequiredArgsConstructor
 @Controller
 public class VoicedataIndexController {
@@ -50,6 +52,22 @@ public class VoicedataIndexController {
         model.addAttribute("voicedata", dto);
         return "voice/detail";
     }
+
+//    //검색하기
+//    @GetMapping("voice/search")
+//    public String search(String keyword, Model model, @PageableDefault(sort = "id", direction = Sort.Direction.DESC)
+//                         Pageable pageable){
+//        Page<Voicedata> searchList = voicedataService.search(keyword, pageable);
+//
+//        model.addAttribute("searchList", searchList);
+//        model.addAttribute("keyword", keyword);
+//        model.addAttribute("previous", pageable.previousOrFirst().getPageNumber());
+//        model.addAttribute("next", pageable.next().getPageNumber());
+//        model.addAttribute("hasNext", searchList.hasNext());
+//        model.addAttribute("hasPrev", searchList.hasPrevious());
+//
+//        return "voice/voiceSearch";
+//    }
 
     //재학습된 목록읽어오기
     @GetMapping("/voice/retrain")
