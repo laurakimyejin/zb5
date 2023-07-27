@@ -33,9 +33,9 @@ app = Flask(__name__)
 api = Api(app)
 
 
-@api.route("/api/text/<string:user_id>/<string:declaration>", methods=["POST"])
+@api.route("/api/text/<int:idx>/<string:declaration>", methods=["POST"])
 class HelloWorld(Resource):
-    def post(self, user_id, declaration):
+    def post(self, idx, declaration):
         global text_read
         declaration = re.sub("[^0-9]", "", declaration)
         text = request.form.get('text')
@@ -44,7 +44,7 @@ class HelloWorld(Resource):
         prediction = predict(text_read)
 
         data = {
-            'user_id': user_id,
+            'idx': idx,
             'phone': declaration,
             'result': prediction
         }
@@ -57,7 +57,7 @@ class HelloWorld(Resource):
             database="301project",
         )
         cursor = conn.cursor()
-        query = f"""UPDATE voicedata SET reroll='{prediction}' where user_id='{user_id}' and declaration='{declaration}'"""
+        query = f"""UPDATE voicedata SET reroll='{prediction}' where idx='{idx}' and declaration='{declaration}'"""
         cursor.execute(query)
         conn.commit()
         cursor.close()

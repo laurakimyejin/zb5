@@ -36,7 +36,7 @@ public class VoicedataIndexController {
 
     /*전체 목록 읽어오기*/
     @GetMapping("/voice/list")
-    public String dataList(Model model, @PageableDefault(size = 20, sort = "id", direction = Sort.Direction.DESC)
+    public String dataList(Model model, @PageableDefault(size = 5, sort = "id", direction = Sort.Direction.DESC)
     Pageable pageable){
         Page<Voicedata> voicedata = voicedataService.list(pageable);
         model.addAttribute("voicedatas", voicedata);
@@ -119,7 +119,7 @@ public class VoicedataIndexController {
 
     //재학습된 목록읽어오기
     @GetMapping("/voice/retrain")
-    public String reList(Model model, @PageableDefault(size = 20, sort = "id", direction = Sort.Direction.DESC)
+    public String reList(Model model, @PageableDefault(size = 5, sort = "id", direction = Sort.Direction.DESC)
                          Pageable pageable){
         Page<Voicedata> voicedata = voicedataService.list(pageable);
         model.addAttribute("voicedatas", voicedata);
