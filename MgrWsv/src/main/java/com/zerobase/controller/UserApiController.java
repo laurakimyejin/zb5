@@ -1,22 +1,22 @@
 package com.zerobase.controller;
 
 import com.zerobase.application.dto.ResponseDto;
+import com.zerobase.application.dto.VoicedataDto;
 import com.zerobase.application.dto.request.UserSaveRequestDto;
 import com.zerobase.application.dto.request.UserUpdateDto;
 import com.zerobase.domain.RoleType;
 import com.zerobase.domain.User;
 import com.zerobase.application.service.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -25,6 +25,7 @@ import javax.validation.Valid;
  * 객체는 데이터로 표현되기 쉬운 JSON, XML과 같은 형태로 결과를 출력한다.
  * Web API라고 하며 데이터로만 응답하는 HTTP 서비스를 생성하는데 사용된다.
  */
+@Slf4j
 @RequiredArgsConstructor
 @RestController
 public class UserApiController {
@@ -48,4 +49,15 @@ public class UserApiController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         return new ResponseDto<Integer>(HttpStatus.OK.value(), 1);
     }
+
+    /* UPDATE(SUBMIT) */
+//    @PutMapping("/api/user/{idx}")
+//    public ResponseEntity updateRole(@PathVariable Long idx, @RequestBody UserUpdateDto userUpdateDto){
+//        log.info("1");
+//        userService.updateRole(idx, userUpdateDto);
+//        log.info("2");
+//        return ResponseEntity.ok(idx);
+//    }
+
+
 }

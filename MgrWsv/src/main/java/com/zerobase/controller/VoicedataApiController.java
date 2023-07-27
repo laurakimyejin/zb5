@@ -45,10 +45,7 @@ public class VoicedataApiController {
             @PathVariable String declaration,
             @RequestBody VoicedataDto dto)
     {
-        log.info("api cntrl1");
         voicedataService.reroll(dto, idx, declaration);
-        log.info("cntrl1 "+ idx );
-        log.info("api cntrl2");
         return new ResponseEntity(HttpStatus.OK);
 
     }

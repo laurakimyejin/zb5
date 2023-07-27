@@ -6,6 +6,9 @@ let index = {
         $("#btn-update").on("click", () => {
             this.update();
         });
+        // $("#btn-role").on("click", () => {
+        //     this.role();
+        // });
     },
     save: function () {
         let data = {
@@ -71,6 +74,33 @@ let index = {
             alert("양식에 맞게 정보를 기입해 주세요!!");
         });
     },
+
+    // role: function (){
+    //     const data ={
+    //         idx: $("#idx").val(),
+    //         role: $("#role").val()
+    //     }
+    //     const con_check = confirm("권한 변경하시겠습니까?");
+    //     if (con_check === true) {
+    //         if (data.role === "ADMIN") {
+    //             data.role = "USER";
+    //         } else {
+    //             data.role = "ADMIN";
+    //         }
+    //         $.ajax({
+    //             type: "PUT",
+    //             url: "/api/user/" + data.idx,
+    //             data: JSON.stringify(data),
+    //             contentType: "application/json; charset=utf-8",
+    //             dataType: "json"
+    //         }).done(function () {
+    //             alert("제출하였습니다");
+    //             location.href = "/voice/listForm";
+    //         }).fail(function (error) {
+    //             alert(JSON.stringify(error));
+    //         });
+    //     }
+    // }
 
     // update:
     //

@@ -68,4 +68,14 @@ public class User {
         this.provider = provider;
         this.providerId = providerId;
     }
+
+	public RoleType getRole(RoleType roleType) {
+		if (roleType == RoleType.ADMIN){
+			System.out.println("성공");
+
+		}else {
+			System.out.println("실패");
+		}
+		return getRole();
+	}
 }

@@ -2,8 +2,6 @@ package com.zerobase.application.service;
 
 import com.zerobase.application.dto.VoicedataDto;
 import com.zerobase.domain.Voicedata;
-import com.zerobase.domain.User;
-import com.zerobase.infrastructure.repository.UserRepository;
 import com.zerobase.infrastructure.repository.VoicedataRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -34,15 +32,12 @@ import java.util.stream.Collectors;
 public class VoicedataService {
 
     private final VoicedataRepository voicedataRepository;
-//    private final UserRepository userRepository;
-
-    //create
 
     //update
     @Transactional
     public void update(Long id, VoicedataDto dto){
         Voicedata voicedata = voicedataRepository.findById(id).orElseThrow(()->
-                new IllegalArgumentException("없다구ㅠ. id=" + id));
+                new IllegalArgumentException("데이터가 존재하지 않습니다. id=" + id));
 
         voicedata.update(dto.getAdmindata());
     }
@@ -73,24 +68,6 @@ public class VoicedataService {
         Voicedata voicedata = voicedataRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 게시물을 찾을 수 없습니다 id= " + id));
         return voicedata.toDto();
     }
-
-
-    //search
-//    @Transactional
-//    public Page<Voicedata> search(Pageable pageable, Voicedata.SearchForm form) {
-//        if (form.getSearchType().equals("disdata")) {
-//            return voicedataRepository.searchAllByDecl(pageable, form.getStart().toString(), form.getEnd().toString(), form.getKeyword());
-//        } else {
-//            return voicedataRepository.searchAllByUserId(pageable, form.getStart().toString(), form.getEnd().toString(), form.getKeyword());
-//        }
-//    }
-
-
-//    @Transactional(readOnly = true)
-//    public Page<Voicedata> search(String keyword, Pageable pageable){
-//        Page<Voicedata> voicedataList = voicedataRepository.findByDeclaration(keyword, pageable);
-//        return voicedataList;
-//    }
 
     /*재학습 요청 service*/
     @Transactional
@@ -131,7 +108,6 @@ public class VoicedataService {
     /*모델 업데이트 요청 service*/
     @Transactional
     public void updatemodel(){
-        log.info("service 1");
         URI uri = UriComponentsBuilder
                 .fromUriString("http://127.0.0.1:5000")
                 .path("/api/modelupdate/")
@@ -140,17 +116,9 @@ public class VoicedataService {
                 .expand()
                 .toUri();
 
-        log.info("service 2");
         HttpEntity<Void> request = new HttpEntity<>(null, null);
-
-        log.info("service 3");
-
         RestTemplate restTemplate = new RestTemplate();
-
-        log.info("service 4");
         ResponseEntity<Void> response = restTemplate.exchange(uri, HttpMethod.GET, request, Void.class);
-
-        log.info("service 5");
     }
 
 }

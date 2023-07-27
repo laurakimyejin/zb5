@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <th:block th:replace="/layout/header.html :: fragment-header"></th:block>
+    <style>
+        h2 {
+            text-align: center;
+        }
+
+    </style>
+</head>
+<div th:replace="/layout/nav.html :: fragment-nav"></div>
+<body>
+<div class="container" style="max-width: 1500px">
+    <div class="py-5 text-center">
+        <h2>👥사용자 관리👥</h2>
+    </div>
+
+    <hr class="my-4">
+    <div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>No</th>
+                <!--<th>아이디</th>-->
+                <th>이름</th>
+                <th>등급</th>
+              <!--  <th></th>-->
+                <th>전화번호</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user : ${users}">
+                <input type="hidden" id="idx" th:value="${user.getIdx()}">
+                <td th:text="${user.idx}">No.</td>
+                <!--<td><a th:href="${user.userid}"}>${user.getUserid()}</a></td>-->
+                <td th:text="${user.username}">이름</td>
+                <input type="hidden" id="role" th:value="${user.getRole()}">
+                <td th:text="${user.getRole()}">role</td>
+               <!-- <td>
+                    <select name="role">
+                        <option value="ADMIN">ADMIN</option>
+                        <option value="USER">USER</option>
+                    </select>
+                </td>-->
+                <td th:text="${user.phoneNumber}">전화번호</td>
+<!--                <td>-->
+<!--                    <button id="btn-role" class="btn btn-primary">권한변경</button>-->
+<!--                    <script src="/js/user.js"></script>-->
+<!--                </td>-->
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div> <!-- /container -->
+<footer th:replace="/layout/footer.html :: fragment-footer"></footer>
+</body>
+</html>

@@ -28,10 +28,6 @@
         <!--      <th>작성자</th><td><span th:text="${voicedata.getUser().getUserid()}"></span></td>-->
         <!--    </tr>-->
 
-
-
-
-
 <!--        <tr>-->
 <!--            <th>신고된 번호</th><td><span><b><i th:text="${voicedata.declaration}"></i></b></span></td>-->
 <!--        </tr>-->
@@ -42,13 +38,6 @@
 <!--        <tr>-->
 <!--            <th>유저고유번호</th><td><span><b><i th:text="${voicedata.getUser.idx}"></i></b></span></td>-->
 <!--        </tr>-->
-        <tr>
-            <input type="hidden" id="idx" th:value="${voicedata.getUser.idx}">
-            <th>유저고유번호</th><td><span><b><i th:text="${voicedata.getUser.idx}"></i></b></span></td>
-        </tr>
-
-
-
 
         <tr>
             <th>AI판별값</th><td><span><b><i th:text="${voicedata.disdata}"></i></b></span></td>
@@ -61,6 +50,12 @@
         </tr>
         <tr>
             <th>변조여부</th><td><span><b><i th:text="${voicedata.mfcc}"></i></b></span></td>
+        </tr>
+        <tr>
+            <th>⚠️재학습 결과</th><td><span><b><i th:text="${voicedata.reroll}"></i></b></span></td>
+        </tr>
+        <tr>
+            <th>⚠️수정일</th><td><span><b><i th:text="${voicedata.modified_date}"></i></b></span></td>
         </tr>
 
         <!--    <tr>-->

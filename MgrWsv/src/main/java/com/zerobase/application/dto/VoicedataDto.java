@@ -1,8 +1,10 @@
 package com.zerobase.application.dto;
 
+import com.querydsl.core.annotations.QueryProjection;
 import com.zerobase.domain.User;
 import com.zerobase.domain.Voicedata;
 import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 @Builder
@@ -23,6 +25,10 @@ public class VoicedataDto {
     private LocalDate created_date;
     private LocalDate modified_date;
     private User user;
+
+    //검색용
+    private String type;
+    private String keyword;
 
     /*Dto->entity*/
     public Voicedata toEntity(Long idx){
@@ -78,5 +84,23 @@ public class VoicedataDto {
         this.user=voicedata.getUser();
         return this;
     }
+
+//    @QueryProjection
+//    public VoicedataDto(Long id,String audio_file,String content, String declaration ,String disdata ,String persent ,String admindata ,String reroll ,String mfcc, LocalDate created_date,LocalDate modified_date ,User user){
+//        this.id=id;
+//        this.audio_file=audio_file;
+//        this.content= content;
+//        this.declaration=declaration;
+//        this.disdata=disdata;
+//        this.persent=persent;
+//        this.admindata=admindata;
+//        this.reroll=reroll;
+//        this.mfcc=mfcc;
+//        this.created_date=created_date;
+//        this.modified_date=modified_date;
+//        this.user=user;
+//    }
+
+
 
 }

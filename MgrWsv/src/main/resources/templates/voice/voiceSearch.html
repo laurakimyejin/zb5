@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <th:block th:replace="/layout/header.html :: fragment-header"></th:block>
+    <style>
+        h2 {
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+<hr class="my-4">
+<div align="center" id="voicelist">
+    <table class="table table-hover table-fixed">
+        <thead>
+        <tr>
+            <th class="text-center">No</th>
+            <th class="text-center">파일명</th>
+            <th class="text-center">작성자</th>
+            <th class="text-center">신고된 번호</th>
+            <th class="text-center">AI판별값</th>
+            <th class="text-center">AI확률</th>
+            <th class="text-center">관리자판별값</th>
+            <th class="text-center">변조여부</th>
+            <th class="text-center">등록일</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="searchList : ${searchList}">
+            <td align="center" th:text="${searchList.id}">No.</td>
+            <td align="center"><a th:href="@{/voice/read/{id}(id=${searchList.getId()})}" th:text="${searchList.audio_file}"></a></td>
+            <td align="center" th:text="${searchList.getUser.userid}">작성자</td>
+            <td align="center" th:text="${searchList.declaration}">신고된 번호</td>
+            <td align="center" th:text="${searchList.disdata}">AI판별값</td>
+            <td align="center" th:text="${searchList.persent}">확률</td>
+            <td align="center" th:text="${searchList.admindata}">재판별값</td>
+            <td align="center" th:text="${searchList.mfcc}">변조여부</td>
+            <td align="center" th:text="${searchList.created_date}">등록일</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<footer th:replace="/layout/footer.html :: fragment-footer"></footer>
+</body>
+
+</html>

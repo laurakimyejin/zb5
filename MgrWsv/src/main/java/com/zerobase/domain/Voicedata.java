@@ -1,7 +1,9 @@
 package com.zerobase.domain;
 
 import com.zerobase.application.dto.VoicedataDto;
+import com.zerobase.infrastructure.repository.VoicedataRepository;
 import lombok.*;
+import org.springframework.data.domain.Page;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -75,20 +77,15 @@ public class Voicedata {
                 .build();
     }
 
-    @Data
-    public class SearchForm {
 
-        @DateTimeFormat(pattern = "yyyy-MM-dd")
-        private LocalDate start;
-
-        @DateTimeFormat(pattern = "yyyy-MM-dd")
-        private LocalDate end;
-
-        private String searchType;
-        private String keyword;
-    }
 
     public void update(String admindata){
         this.admindata = admindata;
     }
+
+//    public Page<VoicedataDto> selectSearchList(VoicedataDto voicedataDto){
+//        return VoicedataRepository.selectList("Voicedata.selectSearchList", voicedataDto);
+//    }
+
+
 }
